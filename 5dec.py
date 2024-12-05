@@ -92,7 +92,7 @@ input_data = """
 61,13,29
 97,13,75,29,47
 """
-file_path = os.path.join(os.path.dirname(__file__), 'data/5.txt')
-with open(file_path) as f:
-    input_data = f.read()
+# file_path = os.path.join(os.path.dirname(__file__), 'data/5.txt')
+# with open(file_path) as f:
+#     input_data = f.read()
 print(sum_middle_pages(input_data))
