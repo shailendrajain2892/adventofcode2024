@@ -6,6 +6,7 @@ def find_guard_init_pos(grid, m, n):
             if grid[i][j] == "^":
                 return i, j
     return -1, -1
+
 def find_distinct_pos(grid):
     # print(grid)
     m, n = len(grid), len(grid[0])
@@ -14,34 +15,34 @@ def find_distinct_pos(grid):
     if i == -1 and j == -1:
         return 0
 
+    visited = set()
     grid[i][j] = "X"
-
+    visited.add((i,j))
     while i != 0 and j != 0 and i != m-1 and j != n-1:
 
         # move north
         while 0 <= i-1 < m and 0 <= j < n and grid[i-1][j] != "#":
             i, j = i-1, j
             grid[i][j] = "X"
+            visited.add((i,j))
         # move East
         while 0 <= i < m and 0 <= j+1 < n and grid[i][j+1] != "#":
             i, j = i, j+1
             grid[i][j] = "X"
+            visited.add((i,j))
         # move South
         while 0 <= i+1 < m and 0 <= j < n and grid[i+1][j] != "#":
             i, j = i+1, j
             grid[i][j] = "X"
+            visited.add((i,j))
         # move west
         while 0 <= i < m and 0 <= j-1 < n and grid[i][j-1] != "#":
             i, j = i, j-1
             grid[i][j] = "X"
+            visited.add((i,j))
 
     
-    count=0
-    for x in range(m):
-        for y in range(n):
-            if grid[x][y] == "X":
-                count+=1
-    return count
+    return len(visited)
 
     
 def main(grid=None):
