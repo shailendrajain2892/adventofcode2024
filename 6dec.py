@@ -18,28 +18,44 @@ def find_distinct_pos(grid):
     visited = set()
     grid[i][j] = "X"
     visited.add((i,j))
-    while i != 0 and j != 0 and i != m-1 and j != n-1:
 
-        # move north
-        while 0 <= i-1 < m and 0 <= j < n and grid[i-1][j] != "#":
-            i, j = i-1, j
-            grid[i][j] = "X"
-            visited.add((i,j))
-        # move East
-        while 0 <= i < m and 0 <= j+1 < n and grid[i][j+1] != "#":
-            i, j = i, j+1
-            grid[i][j] = "X"
-            visited.add((i,j))
-        # move South
-        while 0 <= i+1 < m and 0 <= j < n and grid[i+1][j] != "#":
-            i, j = i+1, j
-            grid[i][j] = "X"
-            visited.add((i,j))
-        # move west
-        while 0 <= i < m and 0 <= j-1 < n and grid[i][j-1] != "#":
-            i, j = i, j-1
-            grid[i][j] = "X"
-            visited.add((i,j))
+    directions = [(-1, 0, "N"),  (0, 1, "E"), (1, 0, "S"), (0, -1, "W")]
+    while True:
+        
+        for dr, dc, _ in directions:
+            move = False
+            ndr, ndc = i+dr, j+dc
+            while 0 <= ndr < m and 0 <= ndc < n and grid[ndr][ndc] != "#":
+                grid[ndr][ndc] = "X"
+                visited.add((ndr,ndc))
+                ndr, ndc = ndr+dr, ndc+dc
+                move = True
+            i, j = ndr-dr, ndc-dc
+
+        if not move:
+            break
+                
+
+        # # move north
+        # while 0 <= i-1 < m and 0 <= j < n and grid[i-1][j] != "#":
+        #     i, j = i-1, j
+        #     grid[i][j] = "X"
+        #     visited.add((i,j))
+        # # move East
+        # while 0 <= i < m and 0 <= j+1 < n and grid[i][j+1] != "#":
+        #     i, j = i, j+1
+        #     grid[i][j] = "X"
+        #     visited.add((i,j))
+        # # move South
+        # while 0 <= i+1 < m and 0 <= j < n and grid[i+1][j] != "#":
+        #     i, j = i+1, j
+        #     grid[i][j] = "X"
+        #     visited.add((i,j))
+        # # move west
+        # while 0 <= i < m and 0 <= j-1 < n and grid[i][j-1] != "#":
+        #     i, j = i, j-1
+        #     grid[i][j] = "X"
+        #     visited.add((i,j))
 
     
     return len(visited)
@@ -70,4 +86,4 @@ grid_data = """
 """
 grid = [list(line) for line in grid_data.strip().split("\n")]
 
-print(main())
+print(main(grid))
