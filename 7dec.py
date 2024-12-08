@@ -5,8 +5,10 @@ def check_equation_validity(nums, ops):
     for i in range(len(nums)-1):
         if ops[i] == "+":
             result+=nums[i+1]
-        else:
+        elif ops[i] == "*":
             result*=nums[i+1]
+        else:
+            result = int(str(result)+str(nums[i+1]))
     return result
 
 def is_equation_valid(test_value, nums):
@@ -16,13 +18,21 @@ def is_equation_valid(test_value, nums):
             return True
     return False
 
+def is_equation_valid_part2(test_value, nums):
+    nums_position = len(nums)-1
+    for ops in product(["+", "*", "||"], repeat=nums_position):
+        if check_equation_validity(nums, ops) == test_value:
+            return True
+    return False
+
+
 def calculate_total_calibration(input_data):
     total = 0
     for line in input_data.strip().split("\n"):
         test_value, numbers = line.split(": ")
         test_value = int(test_value)
         nums = list(map(int, numbers.split(" ")))
-        if is_equation_valid(test_value, nums):
+        if is_equation_valid_part2(test_value, nums):
             total+=test_value
     return total
 
