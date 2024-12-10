@@ -9,9 +9,9 @@ def find_checksum(input_string):
     # print(disk_map)
     # print(disk_map == "00...111...2...333.44.5555.6666.777.888899")
     updated_disk_map = fill_empty_space_with_num(disk_map)
-    print(len(updated_disk_map))
+    updated_disk_map_part2 = fill_empty_space_with_num_part2(disk_map=disk_map)
     # print(updated_disk_map=="022111222......")
-    checksum = calculate_checksum(updated_disk_map)
+    checksum = calculate_checksum(updated_disk_map_part2)
     return checksum
 
 
@@ -49,6 +49,7 @@ def fill_empty_space_with_num(disk_map):
     print(countidandspaces(updated_disk_map))
     print(countidandspaces(disk_map))
     return updated_disk_map
+
 
 def countidandspaces(input_string):
     count, space = 0, 0

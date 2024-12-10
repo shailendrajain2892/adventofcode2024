@@ -1,6 +1,6 @@
 from tqdm import tqdm
 
-with open("./data/day_09.in") as fin:
+with open("./data/9.txt") as fin:
     line = fin.read().strip()
 
 # Allocate a lot of space
